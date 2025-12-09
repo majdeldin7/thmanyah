@@ -83,7 +83,7 @@ Spread pods across nodes
 DB creds, AWS keys via Kubernetes Secrets
 
 ## 🌐 Ingress Access
-http://api,domain.com/
+http://api.domain.com/
 
 ## 🧠 Personal Notes
 - Some parts simplified due to time constraints.
