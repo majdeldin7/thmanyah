@@ -34,23 +34,27 @@ Client → Ingress → API → Auth → DB → Image → S3
 
 ## 📦 Project Structure for Api-service for example:
 api-service/
-  deployment.yaml
-  service.yaml
+  deploy.yaml
+  svc.yaml
   ingress.yaml
   hpa.yaml
   pdb.yaml
-  network-policies/
+  np.yaml
   secrets.yaml
 
 ## 🛠️ Deployment Steps
+
+```bash
 kubectl create namespace api-service
-kubectl apply -f regcred-secret.yaml
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
+kubectl apply -f regcred.yaml
+kubectl apply -f secrets.yaml
+kubectl apply -f deploy.yaml
+kubectl apply -f svc.yaml
 kubectl apply -f ingress.yaml
 kubectl apply -f hpa.yaml
-kubectl apply -f networkpolicies/
+kubectl apply -f np.yaml
 kubectl apply -f pdb.yaml
+```
 
 ## 🔐 Security Hardening
 Non-root execution
@@ -79,7 +83,7 @@ Spread pods across nodes
 DB creds, AWS keys via Kubernetes Secrets
 
 ## 🌐 Ingress Access
-http://<cluster-domain>/
+http://api,domain.com/
 
 ## 🧠 Personal Notes
 - Some parts simplified due to time constraints.
@@ -87,4 +91,3 @@ http://<cluster-domain>/
 
 ## 🏁 Conclusion
 This project is a production-grade Kubernetes deployment following SRE principles.
-"""
