@@ -62,10 +62,11 @@ Drop all capabilities
 Disable privilege escalation
 
 ## 🌐 Network Policies
+```
 Default deny
 Allow ingress from: ingress controller, monitoring, auth, image
 Allow egress to: DB subnet, auth, image, kube-dns
-
+```
 ## 📈 Autoscaling (HPA)
 CPU Target: 60%
 Memory Target: 70%
