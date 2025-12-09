@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: auth-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - auth-service
+            topologyKey: kubernetes.io/hostname
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: auth-service
+          image: majdeldin7/auth-service:v1
+          ports:
+            - containerPort: 4000
+          env:
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                key: db.username
+                name: thmanyah-credentials
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: db.password
+                name: thmanyah-credentials
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                key: db.host
+                name: thmanyah-credentials
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                key: db.name
+                name: thmanyah-credentials
+          - name: AWS_S3_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: access.key
+                name: thmanyah-credentials
+          - name: AWS_S3_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secret.key
+                name: thmanyah-credentials
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 4000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 4000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: "150m"
+              memory: "128Mi"
+            limits:
+              cpu: "400m"
+              memory: "256Mi"
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            runAsGroup: 101
+            runAsNonRoot: true
+            runAsUser: 100

@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: image-sm
+  namespace: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - image-service
+  selector:
+    matchLabels:
+      app: image-service
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
