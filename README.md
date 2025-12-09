@@ -30,7 +30,7 @@ Following SRE principles:
 - Resource Requests & Limits
 
 ## 🧩 Architecture
-Client → Ingress → API → Auth → Image → DB/S3
+Client → Ingress → API → Auth → DB → Image → S3
 
 ## 📦 Project Structure for Api-service for example:
 api-service/
