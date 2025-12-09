@@ -32,7 +32,7 @@ Following SRE principles:
 ## 🧩 Architecture
 Client → Ingress → API → Auth → DB → Image → S3
 
-## 📦 Project Structure for Api-service for example:
+## 📦 Project Structure for **Api-service** for example:
 api-service/
   deploy.yaml
   svc.yaml
@@ -72,7 +72,7 @@ CPU Target: 60%
 Memory Target: 70%
 
 ## 🧪 Health Probes
-/health readiness + liveness probes
+Readiness + Liveness probes
 
 ## 🧱 Pod Disruption Budget
 minAvailable: 1
