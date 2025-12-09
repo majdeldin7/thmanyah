@@ -40,14 +40,13 @@ api-service/
   hpa.yaml
   pdb.yaml
   np.yaml
-  secrets.yaml
+  regcred.yaml
 
 ## 🛠️ Deployment Steps
 
 ```bash
 kubectl create namespace api-service
 kubectl apply -f regcred.yaml
-kubectl apply -f secrets.yaml
 kubectl apply -f deploy.yaml
 kubectl apply -f svc.yaml
 kubectl apply -f ingress.yaml
