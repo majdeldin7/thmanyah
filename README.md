@@ -1,4 +1,4 @@
-# thmanyah SRE project
+# Thmanyah SRE project
 ## 🏷️ Introduction
 As a **Site Reliability Engineering (SRE)** engineer, the goal of this project was to build a reliable, secure, and scalable Kubernetes environment for multiple distributed backend services.
 Due to limited time, some parts were simplified. Since coding is not my primary specialty, I used **ChatGPT** to help with application code while I focused on infrastructure, deployment, reliability, and security.
